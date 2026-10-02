@@ -3,21 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>AURA AI</title>
-
-<meta name="description"
-content="AURA AI — AI assistant developed by Yuvraj Singh Rathore.">
 
 <style>
 *{box-sizing:border-box}
 
 :root{
-  --bg:#000;
-  --panel:#090909;
+  --black:#000;
+  --panel:#080808;
   --panel2:#111;
   --border:#252525;
-  --text:#fff;
+  --white:#fff;
   --muted:#888;
   --blue:#1677ff;
 }
@@ -26,8 +22,8 @@ body{
   margin:0;
   height:100vh;
   overflow:hidden;
-  background:#000;
-  color:#fff;
+  background:var(--black);
+  color:var(--white);
   font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -42,7 +38,7 @@ body{
   width:270px;
   background:#050505;
   border-right:1px solid #222;
-  padding:15px;
+  padding:14px;
   display:flex;
   flex-direction:column;
 }
@@ -50,31 +46,33 @@ body{
 .logo{
   font-size:24px;
   font-weight:800;
-  padding:10px 5px 18px;
+  padding:10px 6px 18px;
 }
 
 .logo span{
-  color:#1677ff;
+  color:var(--blue);
 }
 
-.newChat{
-  background:#111;
-  color:#fff;
-  border:1px solid #303030;
-  border-radius:10px;
+.new-chat{
+  width:100%;
   padding:12px;
-  text-align:left;
+  border-radius:10px;
+  border:1px solid #303030;
+  background:#111;
+  color:white;
   cursor:pointer;
+  text-align:left;
 }
 
-.newChat:hover{
+.new-chat:hover{
   background:#181818;
 }
 
-.historyTitle{
-  margin:20px 5px 8px;
-  color:#777;
-  font-size:12px;
+.history-title{
+  margin:20px 6px 8px;
+  color:#666;
+  font-size:11px;
+  letter-spacing:.5px;
 }
 
 .history{
@@ -82,39 +80,40 @@ body{
   overflow-y:auto;
 }
 
-.historyItem{
-  padding:10px;
-  border-radius:8px;
-  color:#ccc;
-  cursor:pointer;
+.history-item{
   display:flex;
-  gap:8px;
+  gap:7px;
   align-items:center;
+  padding:10px;
+  margin:3px 0;
+  border-radius:8px;
+  color:#bbb;
+  cursor:pointer;
   font-size:13px;
 }
 
-.historyItem:hover{
+.history-item:hover{
   background:#151515;
 }
 
-.historyName{
+.history-name{
   flex:1;
-  white-space:nowrap;
   overflow:hidden;
+  white-space:nowrap;
   text-overflow:ellipsis;
 }
 
 .creator{
-  text-align:center;
   border-top:1px solid #222;
-  padding:18px 5px 5px;
+  padding:15px 5px 5px;
+  text-align:center;
   color:#777;
   font-size:11px;
   line-height:1.6;
 }
 
 .creator strong{
-  color:#fff;
+  color:white;
 }
 
 /* MAIN */
@@ -135,17 +134,17 @@ body{
   padding:0 18px;
 }
 
-.topTitle{
-  font-weight:bold;
-}
-
 .menu{
   display:none;
-  background:none;
   border:0;
+  background:none;
   color:white;
   font-size:22px;
   margin-right:12px;
+}
+
+.top-title{
+  font-weight:bold;
 }
 
 /* CHAT */
@@ -153,45 +152,45 @@ body{
 .chat{
   flex:1;
   overflow-y:auto;
-  padding:30px 15px 155px;
+  padding:30px 15px 150px;
 }
 
 .welcome{
-  max-width:750px;
+  max-width:800px;
   margin:14vh auto 0;
   text-align:center;
 }
 
 .welcome h1{
   font-size:45px;
-  margin-bottom:12px;
+  margin:0 0 12px;
 }
 
 .welcome h1 span{
-  color:#1677ff;
+  color:var(--blue);
 }
 
 .welcome p{
   color:#888;
 }
 
-.welcomeCreator{
-  margin-top:28px;
-  color:#888;
+.welcome-creator{
+  margin-top:30px;
+  color:#777;
   font-size:13px;
 }
 
-.welcomeCreator strong{
-  color:#fff;
+.welcome-creator strong{
+  color:white;
 }
 
-/* MESSAGES */
+/* MESSAGE */
 
 .message{
   max-width:900px;
   margin:20px auto;
   display:flex;
-  gap:12px;
+  gap:11px;
 }
 
 .message.user{
@@ -203,35 +202,26 @@ body{
 }
 
 .avatar{
-  width:37px;
-  height:37px;
-  min-width:37px;
+  width:36px;
+  height:36px;
+  min-width:36px;
   border-radius:50%;
+  background:#141414;
+  border:1px solid #292929;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#151515;
-  border:1px solid #292929;
   font-weight:bold;
 }
 
-.message.user .avatar{
+.user .avatar{
   order:2;
 }
 
-.message.user .content{
-  order:1;
-  align-items:flex-end;
-}
-
-.message.ai .content{
-  align-items:flex-start;
-}
-
 .content{
+  max-width:78%;
   display:flex;
   flex-direction:column;
-  max-width:78%;
 }
 
 .bubble{
@@ -243,15 +233,30 @@ body{
 }
 
 .user .bubble{
-  background:#1677ff;
-  color:white;
+  background:var(--blue);
   border-bottom-right-radius:5px;
 }
 
 .ai .bubble{
-  background:#111;
-  border:1px solid #242424;
+  background:#101010;
+  border:1px solid #252525;
   border-bottom-left-radius:5px;
+}
+
+.message-image{
+  max-width:280px;
+  max-height:300px;
+  object-fit:contain;
+  border-radius:12px;
+  margin-top:5px;
+  border:1px solid #292929;
+}
+
+.generated-image{
+  max-width:min(600px,100%);
+  border-radius:14px;
+  border:1px solid #292929;
+  margin-top:5px;
 }
 
 .tools{
@@ -266,8 +271,8 @@ body{
   color:#999;
   padding:5px 8px;
   border-radius:7px;
-  font-size:11px;
   cursor:pointer;
+  font-size:11px;
 }
 
 .tool:hover{
@@ -276,11 +281,11 @@ body{
 
 /* COMPOSER */
 
-.composerArea{
+.composer-area{
   position:fixed;
-  bottom:0;
   left:270px;
   right:0;
+  bottom:0;
   padding:15px;
   background:linear-gradient(transparent,#000 35%);
 }
@@ -293,7 +298,7 @@ body{
 .preview{
   display:none;
   align-items:center;
-  gap:10px;
+  gap:9px;
   background:#111;
   border:1px solid #292929;
   border-radius:10px;
@@ -302,31 +307,30 @@ body{
 }
 
 .preview img{
-  width:55px;
-  height:55px;
-  border-radius:8px;
+  width:52px;
+  height:52px;
+  border-radius:7px;
   object-fit:cover;
 }
 
-.previewName{
-  color:#ccc;
-  font-size:13px;
+.preview-name{
+  color:#bbb;
+  font-size:12px;
 }
 
 .remove{
   margin-left:auto;
-  border:0;
   background:none;
+  border:0;
   color:#888;
   cursor:pointer;
-  font-size:17px;
 }
 
 form{
   display:flex;
   align-items:flex-end;
-  gap:5px;
-  padding:8px;
+  gap:4px;
+  padding:7px;
   background:#0d0d0d;
   border:1px solid #303030;
   border-radius:16px;
@@ -344,7 +348,7 @@ form{
 }
 
 .icon:hover{
-  background:#191919;
+  background:#181818;
   color:white;
 }
 
@@ -370,9 +374,9 @@ textarea::placeholder{
   height:42px;
   border:0;
   border-radius:10px;
-  background:#1677ff;
-  color:#fff;
-  font-size:20px;
+  background:var(--blue);
+  color:white;
+  font-size:19px;
   cursor:pointer;
 }
 
@@ -383,8 +387,6 @@ textarea::placeholder{
 .file{
   display:none;
 }
-
-/* MOBILE */
 
 @media(max-width:750px){
 
@@ -405,7 +407,7 @@ textarea::placeholder{
     display:block;
   }
 
-  .composerArea{
+  .composer-area{
     left:0;
   }
 
@@ -416,7 +418,6 @@ textarea::placeholder{
   .content{
     max-width:82%;
   }
-
 }
 </style>
 </head>
@@ -431,13 +432,11 @@ textarea::placeholder{
     ✦ <span>AURA</span> AI
   </div>
 
-  <button class="newChat" id="newChat">
+  <button class="new-chat" id="newChat">
     ＋ New Chat
   </button>
 
-  <div class="historyTitle">
-    CHAT HISTORY
-  </div>
+  <div class="history-title">CHAT HISTORY</div>
 
   <div class="history" id="history"></div>
 
@@ -456,25 +455,19 @@ textarea::placeholder{
 
   <button class="menu" id="menu">☰</button>
 
-  <div class="topTitle">
-    AURA AI
-  </div>
+  <div class="top-title">AURA AI</div>
 
 </header>
 
 <section class="chat" id="chat">
 
-  <div class="welcome" id="welcome">
+  <div class="welcome">
 
-    <h1>
-      ✨ Hello, I'm <span>AURA</span>
-    </h1>
+    <h1>✨ Hello, I'm <span>AURA</span></h1>
 
-    <p>
-      Batao bhai, kya help chahiye?
-    </p>
+    <p>What are we working on today?</p>
 
-    <div class="welcomeCreator">
+    <div class="welcome-creator">
       Created &amp; Developed by
       <strong>YUVRAJ SINGH RATHORE</strong>
     </div>
@@ -485,7 +478,7 @@ textarea::placeholder{
 
 </main>
 
-<div class="composerArea">
+<div class="composer-area">
 
 <div class="composer">
 
@@ -493,57 +486,49 @@ textarea::placeholder{
 
     <img id="previewImg">
 
-    <div class="previewName" id="previewName">
-      Image selected
-    </div>
+    <span class="preview-name" id="previewName">
+      Image
+    </span>
 
-    <button class="remove" id="remove">
-      ✕
-    </button>
+    <button class="remove" id="remove">✕</button>
 
   </div>
 
   <form id="form">
 
     <input
-      type="file"
       id="file"
       class="file"
+      type="file"
       accept="image/*"
       capture="environment"
     >
 
     <button
-      type="button"
       class="icon"
       id="camera"
-      title="Camera / Photo"
-    >
-      📷
-    </button>
+      type="button"
+      title="Add photo"
+    >📷</button>
 
     <button
-      type="button"
       class="icon"
       id="mic"
-      title="Voice"
-    >
-      🎤
-    </button>
+      type="button"
+      title="Voice input"
+    >🎤</button>
 
     <textarea
       id="input"
       rows="1"
-      placeholder="Batao bhai..."
+      placeholder="Message AURA..."
     ></textarea>
 
     <button
       class="send"
       id="send"
       type="submit"
-    >
-      ↑
-    </button>
+    >↑</button>
 
   </form>
 
@@ -571,7 +556,6 @@ const previewName=document.getElementById("previewName");
 const remove=document.getElementById("remove");
 
 const mic=document.getElementById("mic");
-
 const menu=document.getElementById("menu");
 const sidebar=document.getElementById("sidebar");
 
@@ -579,9 +563,60 @@ let chats=JSON.parse(
   localStorage.getItem("aura_chats") || "[]"
 );
 
+let memory=JSON.parse(
+  localStorage.getItem("aura_memory") || "{}"
+);
+
 let currentId=null;
 let messages=[];
 let selectedImage=null;
+
+
+/* MEMORY */
+
+function saveMemory(){
+  localStorage.setItem(
+    "aura_memory",
+    JSON.stringify(memory)
+  );
+}
+
+function updateMemory(text){
+
+  const match=text.match(
+    /(?:my name is|mera naam)\s+([a-zA-Z ]+)/i
+  );
+
+  if(match){
+    memory.name=match[1].trim();
+    saveMemory();
+  }
+
+  if(/call me\s+/i.test(text)){
+
+    const m=text.match(
+      /call me\s+([a-zA-Z ]+)/i
+    );
+
+    if(m){
+      memory.name=m[1].trim();
+      saveMemory();
+    }
+
+  }
+
+  if(/mujhe\s+(.+?)\s+keh ke bulao/i.test(text)){
+
+    const m=text.match(
+      /mujhe\s+(.+?)\s+keh ke bulao/i
+    );
+
+    if(m){
+      memory.name=m[1].trim();
+      saveMemory();
+    }
+  }
+}
 
 
 /* STORAGE */
@@ -593,30 +628,30 @@ function saveAll(){
   );
 }
 
-function id(){
+function makeId(){
   return Date.now().toString(36)+
-         Math.random().toString(36).slice(2);
+    Math.random().toString(36).slice(2);
 }
 
-
-/* HISTORY */
-
-function title(){
+function getTitle(){
 
   const first=messages.find(
     x=>x.role==="user"
   );
 
-  if(!first) return "New Chat";
-
-  return first.content.slice(0,35);
+  return first
+    ? first.content.slice(0,35)
+    : "New Chat";
 }
+
+
+/* HISTORY */
 
 function saveCurrent(){
 
   if(!currentId){
 
-    currentId=id();
+    currentId=makeId();
 
     chats.push({
       id:currentId,
@@ -625,27 +660,27 @@ function saveCurrent(){
       messages:[],
       updatedAt:Date.now()
     });
-
   }
 
-  const c=chats.find(x=>x.id===currentId);
+  const c=chats.find(
+    x=>x.id===currentId
+  );
 
   if(!c)return;
 
   c.messages=messages;
-  c.title=title();
+  c.title=getTitle();
   c.updatedAt=Date.now();
 
   saveAll();
   renderHistory();
-
 }
 
 function renderHistory(){
 
   historyBox.innerHTML="";
 
-  const sorted=[...chats].sort(
+  const list=[...chats].sort(
     (a,b)=>{
       if(a.pinned!==b.pinned)
         return a.pinned ? -1:1;
@@ -654,29 +689,24 @@ function renderHistory(){
     }
   );
 
-  sorted.forEach(c=>{
+  list.forEach(c=>{
 
     const row=document.createElement("div");
 
-    row.className="historyItem";
+    row.className="history-item";
 
     const pin=document.createElement("span");
-
     pin.textContent=c.pinned?"📌":"";
 
     const name=document.createElement("div");
-
-    name.className="historyName";
+    name.className="history-name";
     name.textContent=c.title;
 
     const del=document.createElement("span");
-
     del.textContent="×";
     del.style.color="#777";
 
-    row.appendChild(pin);
-    row.appendChild(name);
-    row.appendChild(del);
+    row.append(pin,name,del);
 
     row.onclick=e=>{
 
@@ -687,6 +717,7 @@ function renderHistory(){
         );
 
         if(currentId===c.id){
+
           currentId=null;
           messages=[];
           renderChat();
@@ -706,22 +737,18 @@ function renderHistory(){
       }
 
       currentId=c.id;
-      messages=c.messages || [];
+      messages=c.messages||[];
 
       renderChat();
-
       sidebar.classList.remove("open");
-
     };
 
     historyBox.appendChild(row);
-
   });
-
 }
 
 
-/* CHAT */
+/* CHAT UI */
 
 function renderChat(){
 
@@ -729,20 +756,16 @@ function renderChat(){
 
   if(messages.length===0){
 
-    const w=document.createElement("div");
-
-    w.className="welcome";
-
-    w.innerHTML=`
-      <h1>✨ Hello, I'm <span>AURA</span></h1>
-      <p>Batao bhai, kya help chahiye?</p>
-      <div class="welcomeCreator">
-        Created &amp; Developed by
-        <strong>YUVRAJ SINGH RATHORE</strong>
+    chat.innerHTML=`
+      <div class="welcome">
+        <h1>✨ Hello, I'm <span>AURA</span></h1>
+        <p>What are we working on today?</p>
+        <div class="welcome-creator">
+          Created &amp; Developed by
+          <strong>YUVRAJ SINGH RATHORE</strong>
+        </div>
       </div>
     `;
-
-    chat.appendChild(w);
 
     return;
   }
@@ -758,20 +781,35 @@ function renderChat(){
     const avatar=document.createElement("div");
 
     avatar.className="avatar";
-
     avatar.textContent=
       m.role==="user"?"U":"✦";
 
     const content=document.createElement("div");
-
     content.className="content";
 
-    const bubble=document.createElement("div");
+    if(m.image){
 
-    bubble.className="bubble";
-    bubble.textContent=m.content;
+      const image=document.createElement("img");
 
-    content.appendChild(bubble);
+      image.className=
+        m.generated
+        ? "generated-image"
+        : "message-image";
+
+      image.src=m.image;
+
+      content.appendChild(image);
+    }
+
+    if(m.content){
+
+      const bubble=document.createElement("div");
+
+      bubble.className="bubble";
+      bubble.textContent=m.content;
+
+      content.appendChild(bubble);
+    }
 
     if(m.role==="assistant"){
 
@@ -780,21 +818,16 @@ function renderChat(){
       tools.className="tools";
 
       const copy=document.createElement("button");
-
       copy.className="tool";
       copy.textContent="Copy";
 
       copy.onclick=()=>{
-        navigator.clipboard.writeText(m.content);
-        copy.textContent="Copied";
-        setTimeout(
-          ()=>copy.textContent="Copy",
-          1200
+        navigator.clipboard.writeText(
+          m.content||""
         );
       };
 
       const regen=document.createElement("button");
-
       regen.className="tool";
       regen.textContent="Regenerate";
 
@@ -803,39 +836,33 @@ function renderChat(){
       };
 
       const share=document.createElement("button");
-
       share.className="tool";
       share.textContent="Share";
 
-      share.onclick=()=>shareChat();
+      share.onclick=shareChat;
 
-      tools.appendChild(copy);
-      tools.appendChild(regen);
-      tools.appendChild(share);
+      tools.append(copy,regen,share);
 
       content.appendChild(tools);
-
     }
 
-    row.appendChild(avatar);
-    row.appendChild(content);
-
+    row.append(avatar,content);
     chat.appendChild(row);
-
   });
 
   chat.scrollTop=chat.scrollHeight;
-
 }
 
 
 /* SEND */
 
-async function sendMessage(text){
+async function sendMessage(text,imageData=null){
+
+  updateMemory(text);
 
   if(!currentId){
 
-    currentId=id();
+    currentId=makeId();
 
     chats.push({
       id:currentId,
@@ -844,12 +871,12 @@ async function sendMessage(text){
       messages:[],
       updatedAt:Date.now()
     });
-
   }
 
   messages.push({
     role:"user",
-    content:text
+    content:text,
+    image:imageData
   });
 
   renderChat();
@@ -858,7 +885,7 @@ async function sendMessage(text){
 
   messages.push({
     role:"assistant",
-    content:"Soch raha hoon..."
+    content:"Thinking..."
   });
 
   renderChat();
@@ -872,11 +899,16 @@ async function sendMessage(text){
       {
         method:"POST",
         headers:{
-          "Content-Type":
-            "application/json"
+          "Content-Type":"application/json"
         },
         body:JSON.stringify({
-          messages:messages.slice(0,-1)
+          messages:messages
+            .slice(0,-1)
+            .map(m=>({
+              role:m.role,
+              content:m.content
+            })),
+          image:imageData
         })
       }
     );
@@ -884,30 +916,32 @@ async function sendMessage(text){
     const data=await response.json();
 
     if(!response.ok){
-
       throw new Error(
-        data.error ||
-        "Request failed"
+        data.error||"Request failed"
       );
-
     }
 
     messages[aiIndex].content=
-      data.reply;
+      data.reply||"";
+
+    if(data.image){
+      messages[aiIndex].image=
+        data.image;
+
+      messages[aiIndex].generated=true;
+    }
 
   }catch(error){
 
     messages[aiIndex].content=
-      "Bhai, abhi ek problem aa gayi: "+
+      "Sorry, something went wrong.\n"+
       error.message;
-
   }
 
   send.disabled=false;
 
   saveCurrent();
   renderChat();
-
 }
 
 
@@ -926,48 +960,45 @@ form.addEventListener(
 
     input.value="";
 
+    let imageData=null;
+
     if(selectedImage){
-
-      const imageMessage=
-        text+
-        "\n\n[Photo attached: "+
-        selectedImage.name+
-        "]";
-
-      clearImage();
-
-      await sendMessage(
-        imageMessage
-      );
-
-    }else{
-
-      await sendMessage(text);
-
+      imageData=
+        await fileToDataURL(
+          selectedImage
+        );
     }
 
+    clearImage();
+
+    await sendMessage(
+      text,
+      imageData
+    );
   }
 );
 
 
-/* NEW CHAT */
+/* IMAGE */
 
-newChat.onclick=()=>{
+function fileToDataURL(f){
 
-  currentId=null;
-  messages=[];
+  return new Promise(
+    (resolve,reject)=>{
 
-  clearImage();
+      const reader=
+        new FileReader();
 
-  renderChat();
-  renderHistory();
+      reader.onload=()=>{
+        resolve(reader.result);
+      };
 
-  input.focus();
+      reader.onerror=reject;
 
-};
-
-
-/* PHOTO / CAMERA */
+      reader.readAsDataURL(f);
+    }
+  );
+}
 
 camera.onclick=()=>{
   file.click();
@@ -993,7 +1024,6 @@ file.onchange=()=>{
   reader.readAsDataURL(f);
 
   preview.style.display="flex";
-
 };
 
 function clearImage(){
@@ -1002,7 +1032,6 @@ function clearImage(){
   file.value="";
   previewImg.src="";
   preview.style.display="none";
-
 }
 
 remove.onclick=clearImage;
@@ -1017,15 +1046,13 @@ if(
   "webkitSpeechRecognition" in window
 ){
 
-  const SpeechRecognition=
-    window.SpeechRecognition ||
+  const SR=
+    window.SpeechRecognition||
     window.webkitSpeechRecognition;
 
-  recognition=
-    new SpeechRecognition();
+  recognition=new SR();
 
   recognition.lang="en-IN";
-
   recognition.interimResults=false;
 
   recognition.onstart=()=>{
@@ -1038,13 +1065,12 @@ if(
 
   recognition.onresult=e=>{
 
-    const text=
+    const spoken=
       e.results[0][0].transcript;
 
-    input.value+=
+    input.value +=
       (input.value?" ":"")+
-      text;
-
+      spoken;
   };
 
   mic.onclick=()=>{
@@ -1052,17 +1078,15 @@ if(
     try{
       recognition.start();
     }catch(e){}
-
   };
 
 }else{
 
   mic.onclick=()=>{
     alert(
-      "Bhai, is browser mein voice input support nahi hai."
+      "Voice input is not supported in this browser."
     );
   };
-
 }
 
 
@@ -1079,15 +1103,14 @@ function regenerate(index){
      previous.role!=="user")
     return;
 
-  messages=
-    messages.slice(0,index);
+  messages=messages.slice(0,index);
 
   renderChat();
 
   sendMessage(
-    previous.content
+    previous.content,
+    previous.image||null
   );
-
 }
 
 
@@ -1103,9 +1126,8 @@ async function shareChat(){
       (m.role==="user"
         ?"You: "
         :"AURA: ")+
-      m.content+
+      (m.content||"")+
       "\n\n";
-
   });
 
   if(navigator.share){
@@ -1123,16 +1145,28 @@ async function shareChat(){
 
     await navigator.clipboard.writeText(text);
 
-    alert(
-      "Chat copy ho gaya. Ab jahan chaho paste/share kar do."
-    );
-
+    alert("Chat copied.");
   }
-
 }
 
 
-/* MOBILE MENU */
+/* NEW CHAT */
+
+newChat.onclick=()=>{
+
+  currentId=null;
+  messages=[];
+
+  clearImage();
+
+  renderChat();
+  renderHistory();
+
+  input.focus();
+};
+
+
+/* MENU */
 
 menu.onclick=()=>{
   sidebar.classList.toggle("open");
@@ -1151,11 +1185,8 @@ input.addEventListener(
     ){
 
       e.preventDefault();
-
       form.requestSubmit();
-
     }
-
   }
 );
 
