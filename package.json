@@ -1,12 +1,13 @@
 {
   "name": "aura-ai",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^5.1.0",
-    "openai": "^6.0.0"
+    "openai": "^6.0.0",
+    "@supabase/supabase-js": "^2.57.0"
   }
 }
