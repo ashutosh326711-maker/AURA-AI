@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AURA AI</title>
+<title>AURA AI — Created by Yuvraj Singh Rathore</title>
+
+<meta name="description" content="AURA AI is an AI assistant for questions, mathematics, writing, coding, study and more. Created and developed by Yuvraj Singh Rathore.">
 
 <style>
 *{
@@ -13,14 +15,14 @@
 
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#0b1020;
   color:#fff;
-  height:100vh;
+  min-height:100vh;
 }
 
 .app{
-  height:100vh;
+  min-height:100vh;
   display:flex;
   flex-direction:column;
 }
@@ -45,7 +47,7 @@ header{
 .chat{
   flex:1;
   overflow-y:auto;
-  padding:25px 15px 130px;
+  padding:25px 15px 160px;
 }
 
 .welcome{
@@ -101,7 +103,7 @@ header{
   left:0;
   right:0;
   padding:15px;
-  background:linear-gradient(transparent,#0b1020 25%);
+  background:linear-gradient(transparent,#0b1020 30%);
 }
 
 form{
@@ -126,6 +128,10 @@ textarea{
   font-size:16px;
 }
 
+textarea::placeholder{
+  color:#7f899e;
+}
+
 button{
   border:0;
   border-radius:12px;
@@ -140,10 +146,46 @@ button:disabled{
   opacity:.5;
 }
 
+.creator{
+  max-width:850px;
+  margin:30px auto 0;
+  padding:20px;
+  text-align:center;
+  border-top:1px solid #252d42;
+}
+
+.creator-title{
+  font-size:20px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#5ee7df,#7c83ff,#d66efd);
+  -webkit-background-clip:text;
+  color:transparent;
+  margin-bottom:8px;
+}
+
+.creator-name{
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.creator-text{
+  color:#8d98ad;
+  font-size:13px;
+  margin-top:7px;
+}
+
 @media(max-width:600px){
+
   .welcome h1{
     font-size:36px;
   }
+
+  .creator{
+    margin-left:10px;
+    margin-right:10px;
+  }
+
 }
 </style>
 </head>
@@ -163,6 +205,22 @@ button:disabled{
     <p>Ask me anything — maths, writing, coding, study and more.</p>
   </div>
 
+  <div class="creator">
+
+    <div class="creator-title">
+      ✦ AURA AI
+    </div>
+
+    <div class="creator-name">
+      Created &amp; Developed by Yuvraj Singh Rathore
+    </div>
+
+    <div class="creator-text">
+      © 2026 AURA AI · All rights reserved
+    </div>
+
+  </div>
+
 </div>
 
 <div class="composer">
@@ -175,7 +233,7 @@ button:disabled{
   rows="1"
 ></textarea>
 
-<button id="send">↑</button>
+<button id="send" type="submit">↑</button>
 
 </form>
 
@@ -192,7 +250,7 @@ const send = document.getElementById("send");
 
 let messages = [];
 
-function addMessage(role, text){
+function addMessage(role,text){
 
   const welcome = document.getElementById("welcome");
 
@@ -224,7 +282,7 @@ function addMessage(role, text){
   return bubble;
 }
 
-form.addEventListener("submit", async (event) => {
+form.addEventListener("submit",async(event)=>{
 
   event.preventDefault();
 
@@ -239,7 +297,7 @@ form.addEventListener("submit", async (event) => {
     content:text
   });
 
-  addMessage("user", text);
+  addMessage("user",text);
 
   send.disabled = true;
 
@@ -250,11 +308,13 @@ form.addEventListener("submit", async (event) => {
 
   try{
 
-    const response = await fetch("/api/chat", {
+    const response = await fetch("/api/chat",{
       method:"POST",
+
       headers:{
         "Content-Type":"application/json"
       },
+
       body:JSON.stringify({
         messages:messages
       })
@@ -263,7 +323,9 @@ form.addEventListener("submit", async (event) => {
     const data = await response.json();
 
     if(!response.ok){
-      throw new Error(data.error || "Request failed");
+      throw new Error(
+        data.error || "Request failed"
+      );
     }
 
     aiBubble.textContent = data.reply;
@@ -282,13 +344,14 @@ form.addEventListener("submit", async (event) => {
   }finally{
 
     send.disabled = false;
+
     input.focus();
 
   }
 
 });
 
-input.addEventListener("keydown", (event) => {
+input.addEventListener("keydown",(event)=>{
 
   if(event.key === "Enter" && !event.shiftKey){
 
@@ -301,22 +364,6 @@ input.addEventListener("keydown", (event) => {
 });
 
 </script>
-<footer style="
-  text-align:center;
-  padding:30px 15px;
-  color:#9da7ba;
-  font-size:14px;
-">
-  <div style="font-size:18px;color:white;font-weight:bold;">
-    ✦ AURA AI
-  </div>
 
-  <div style="margin-top:8px;">
-    Created & Developed by <strong>Yuvraj Singh Rathore</strong>
-  </div>
-
-  <div style="margin-top:6px;">
-    © 2026 AURA AI. All rights reserved.
-  </div>
-</footer></body>
+</body>
 </html>
