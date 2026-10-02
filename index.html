@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AURA AI</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b1020;
+  color:#fff;
+  height:100vh;
+}
+
+.app{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  height:64px;
+  display:flex;
+  align-items:center;
+  padding:0 20px;
+  border-bottom:1px solid #252d42;
+  background:#10172a;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#5ee7df,#7c83ff,#d66efd);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.chat{
+  flex:1;
+  overflow-y:auto;
+  padding:25px 15px 130px;
+}
+
+.welcome{
+  text-align:center;
+  margin-top:15vh;
+}
+
+.welcome h1{
+  font-size:48px;
+  margin-bottom:10px;
+}
+
+.welcome p{
+  color:#9da7ba;
+}
+
+.message{
+  max-width:850px;
+  margin:18px auto;
+  display:flex;
+  gap:12px;
+}
+
+.avatar{
+  min-width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#252e45;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bubble{
+  padding:11px 14px;
+  border-radius:14px;
+  line-height:1.6;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.user .bubble{
+  background:#263352;
+}
+
+.ai .bubble{
+  background:#151d30;
+}
+
+.composer{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:15px;
+  background:linear-gradient(transparent,#0b1020 25%);
+}
+
+form{
+  max-width:850px;
+  margin:auto;
+  display:flex;
+  gap:8px;
+  background:#151d30;
+  border:1px solid #303a55;
+  border-radius:16px;
+  padding:8px;
+}
+
+textarea{
+  flex:1;
+  resize:none;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:12px;
+  font-size:16px;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  background:#6575ff;
+  color:white;
+  padding:0 18px;
+  cursor:pointer;
+  font-size:20px;
+}
+
+button:disabled{
+  opacity:.5;
+}
+
+@media(max-width:600px){
+  .welcome h1{
+    font-size:36px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">✦ AURA AI</div>
+</header>
+
+<div class="chat" id="chat">
+
+  <div class="welcome" id="welcome">
+    <h1>✨ Hello, I'm AURA</h1>
+    <p>Ask me anything — maths, writing, coding, study and more.</p>
+  </div>
+
+</div>
+
+<div class="composer">
+
+<form id="form">
+
+<textarea
+  id="input"
+  placeholder="Message AURA AI..."
+  rows="1"
+></textarea>
+
+<button id="send">↑</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const chat = document.getElementById("chat");
+const send = document.getElementById("send");
+
+let messages = [];
+
+function addMessage(role, text){
+
+  const welcome = document.getElementById("welcome");
+
+  if(welcome){
+    welcome.remove();
+  }
+
+  const message = document.createElement("div");
+
+  message.className = "message " + role;
+
+  const avatar = document.createElement("div");
+
+  avatar.className = "avatar";
+  avatar.textContent = role === "user" ? "U" : "✦";
+
+  const bubble = document.createElement("div");
+
+  bubble.className = "bubble";
+  bubble.textContent = text;
+
+  message.appendChild(avatar);
+  message.appendChild(bubble);
+
+  chat.appendChild(message);
+
+  chat.scrollTop = chat.scrollHeight;
+
+  return bubble;
+}
+
+form.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  const text = input.value.trim();
+
+  if(!text) return;
+
+  input.value = "";
+
+  messages.push({
+    role:"user",
+    content:text
+  });
+
+  addMessage("user", text);
+
+  send.disabled = true;
+
+  const aiBubble = addMessage(
+    "ai",
+    "Thinking..."
+  );
+
+  try{
+
+    const response = await fetch("/api/chat", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        messages:messages
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || "Request failed");
+    }
+
+    aiBubble.textContent = data.reply;
+
+    messages.push({
+      role:"assistant",
+      content:data.reply
+    });
+
+  }catch(error){
+
+    aiBubble.textContent =
+      "Sorry, an error occurred: " +
+      error.message;
+
+  }finally{
+
+    send.disabled = false;
+    input.focus();
+
+  }
+
+});
+
+input.addEventListener("keydown", (event) => {
+
+  if(event.key === "Enter" && !event.shiftKey){
+
+    event.preventDefault();
+
+    form.requestSubmit();
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
