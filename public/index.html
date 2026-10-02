@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA AI</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0b1020;
+  color:#fff;
+}
+
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  height:65px;
+  display:flex;
+  align-items:center;
+  padding:0 22px;
+  background:#11182b;
+  border-bottom:1px solid #29324a;
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+  background:linear-gradient(90deg,#5ee7df,#7c83ff,#d66efd);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.chat{
+  flex:1;
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:25px 15px 125px;
+}
+
+.welcome{
+  text-align:center;
+  padding-top:13vh;
+}
+
+.welcome h1{
+  font-size:48px;
+  margin:0 0 12px;
+}
+
+.welcome p{
+  color:#9da7ba;
+  font-size:16px;
+}
+
+.message{
+  display:flex;
+  gap:12px;
+  margin:20px 0;
+  align-items:flex-start;
+}
+
+.avatar{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#28334e;
+  font-weight:bold;
+}
+
+.bubble{
+  max-width:80%;
+  padding:13px 16px;
+  border-radius:15px;
+  line-height:1.6;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.user .bubble{
+  background:#29385d;
+}
+
+.ai .bubble{
+  background:#171f34;
+}
+
+.composer{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:15px;
+  background:linear-gradient(transparent,#0b1020 30%);
+}
+
+form{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border:1px solid #303a
