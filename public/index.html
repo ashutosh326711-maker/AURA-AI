@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>AURA AI</title>
 
 <meta name="description"
-content="AURA AI — an AI assistant powered by OpenAI technology and developed by Yuvraj Singh Rathore.">
+content="AURA AI — AI assistant developed by Yuvraj Singh Rathore.">
 
 <style>
 *{box-sizing:border-box}
 
 :root{
   --bg:#000;
-  --panel:#0b0b0b;
+  --panel:#090909;
   --panel2:#111;
-  --border:#242424;
+  --border:#252525;
   --text:#fff;
-  --muted:#8d8d8d;
+  --muted:#888;
   --blue:#1677ff;
-  --blue2:#0d5ed7;
 }
 
 body{
   margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
   height:100vh;
   overflow:hidden;
+  background:#000;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 .app{
@@ -36,106 +36,88 @@ body{
   display:flex;
 }
 
+/* SIDEBAR */
+
 .sidebar{
   width:270px;
   background:#050505;
-  border-right:1px solid var(--border);
+  border-right:1px solid #222;
+  padding:15px;
   display:flex;
   flex-direction:column;
-  padding:14px;
-  transition:.2s;
 }
 
-.brand{
-  font-size:23px;
+.logo{
+  font-size:24px;
   font-weight:800;
-  padding:10px 8px 18px;
+  padding:10px 5px 18px;
 }
 
-.brand span{
-  color:var(--blue);
+.logo span{
+  color:#1677ff;
 }
 
-.new-chat{
-  border:1px solid #303030;
+.newChat{
   background:#111;
   color:#fff;
+  border:1px solid #303030;
   border-radius:10px;
   padding:12px;
-  cursor:pointer;
-  font-size:14px;
   text-align:left;
+  cursor:pointer;
 }
 
-.new-chat:hover{
-  background:#191919;
+.newChat:hover{
+  background:#181818;
 }
 
-.history-title{
+.historyTitle{
+  margin:20px 5px 8px;
   color:#777;
   font-size:12px;
-  margin:20px 7px 8px;
-  text-transform:uppercase;
 }
 
 .history{
   flex:1;
-  overflow:auto;
+  overflow-y:auto;
 }
 
-.history-item{
-  display:flex;
-  align-items:center;
-  gap:7px;
+.historyItem{
   padding:10px;
-  margin-bottom:4px;
   border-radius:8px;
-  cursor:pointer;
   color:#ccc;
+  cursor:pointer;
+  display:flex;
+  gap:8px;
+  align-items:center;
   font-size:13px;
 }
 
-.history-item:hover{
+.historyItem:hover{
   background:#151515;
 }
 
-.history-item.active{
-  background:#151515;
-  color:#fff;
-}
-
-.history-name{
+.historyName{
   flex:1;
-  overflow:hidden;
   white-space:nowrap;
+  overflow:hidden;
   text-overflow:ellipsis;
 }
 
-.pin{
-  color:#1680ff;
-}
-
-.delete-history{
-  color:#777;
-  cursor:pointer;
-}
-
-.delete-history:hover{
-  color:#fff;
-}
-
 .creator{
-  border-top:1px solid #222;
-  padding:15px 5px 5px;
   text-align:center;
+  border-top:1px solid #222;
+  padding:18px 5px 5px;
   color:#777;
   font-size:11px;
-  line-height:1.5;
+  line-height:1.6;
 }
 
 .creator strong{
   color:#fff;
 }
+
+/* MAIN */
 
 .main{
   flex:1;
@@ -146,172 +128,213 @@ body{
 
 .topbar{
   height:60px;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #222;
+  background:#050505;
   display:flex;
   align-items:center;
   padding:0 18px;
-  background:#050505;
 }
 
-.mobile-menu{
+.topTitle{
+  font-weight:bold;
+}
+
+.menu{
   display:none;
-  margin-right:12px;
   background:none;
-  color:#fff;
   border:0;
+  color:white;
   font-size:22px;
+  margin-right:12px;
 }
 
-.top-title{
-  font-weight:700;
-}
+/* CHAT */
 
 .chat{
   flex:1;
   overflow-y:auto;
-  padding:25px 15px 155px;
+  padding:30px 15px 155px;
 }
 
 .welcome{
-  max-width:760px;
-  margin:15vh auto 0;
+  max-width:750px;
+  margin:14vh auto 0;
   text-align:center;
 }
 
 .welcome h1{
-  font-size:46px;
-  margin:0 0 12px;
+  font-size:45px;
+  margin-bottom:12px;
 }
 
 .welcome h1 span{
-  color:var(--blue);
+  color:#1677ff;
 }
 
 .welcome p{
   color:#888;
 }
 
+.welcomeCreator{
+  margin-top:28px;
+  color:#888;
+  font-size:13px;
+}
+
+.welcomeCreator strong{
+  color:#fff;
+}
+
+/* MESSAGES */
+
 .message{
-  max-width:850px;
+  max-width:900px;
   margin:20px auto;
   display:flex;
   gap:12px;
-  align-items:flex-start;
+}
+
+.message.user{
+  justify-content:flex-end;
+}
+
+.message.ai{
+  justify-content:flex-start;
 }
 
 .avatar{
-  width:38px;
-  min-width:38px;
-  height:38px;
+  width:37px;
+  height:37px;
+  min-width:37px;
   border-radius:50%;
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:#161616;
+  align-items:center;
+  background:#151515;
   border:1px solid #292929;
   font-weight:bold;
 }
 
-.user .avatar{
-  background:#151515;
+.message.user .avatar{
+  order:2;
 }
 
-.ai .avatar{
-  color:#1680ff;
+.message.user .content{
+  order:1;
+  align-items:flex-end;
+}
+
+.message.ai .content{
+  align-items:flex-start;
+}
+
+.content{
+  display:flex;
+  flex-direction:column;
+  max-width:78%;
 }
 
 .bubble{
-  max-width:calc(100% - 50px);
   padding:12px 15px;
-  border-radius:13px;
+  border-radius:15px;
   line-height:1.6;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
 }
 
 .user .bubble{
-  background:#151515;
+  background:#1677ff;
+  color:white;
+  border-bottom-right-radius:5px;
 }
 
 .ai .bubble{
-  background:#0d0d0d;
-  border:1px solid #1d1d1d;
+  background:#111;
+  border:1px solid #242424;
+  border-bottom-left-radius:5px;
 }
 
-.message-tools{
-  margin-top:7px;
+.tools{
   display:flex;
-  gap:7px;
+  gap:6px;
+  margin-top:6px;
 }
 
-.small-btn{
+.tool{
+  background:#080808;
   border:1px solid #292929;
-  background:#090909;
-  color:#aaa;
-  border-radius:7px;
+  color:#999;
   padding:5px 8px;
-  cursor:pointer;
+  border-radius:7px;
   font-size:11px;
+  cursor:pointer;
 }
 
-.small-btn:hover{
-  color:#fff;
-  border-color:#444;
+.tool:hover{
+  color:white;
 }
 
-.composer-wrap{
+/* COMPOSER */
+
+.composerArea{
   position:fixed;
+  bottom:0;
   left:270px;
   right:0;
-  bottom:0;
   padding:15px;
   background:linear-gradient(transparent,#000 35%);
 }
 
 .composer{
-  max-width:850px;
+  max-width:900px;
   margin:auto;
 }
 
-.attachment-preview{
+.preview{
   display:none;
+  align-items:center;
+  gap:10px;
   background:#111;
   border:1px solid #292929;
   border-radius:10px;
   padding:8px;
   margin-bottom:8px;
-  align-items:center;
-  gap:10px;
 }
 
-.attachment-preview img{
+.preview img{
   width:55px;
   height:55px;
+  border-radius:8px;
   object-fit:cover;
-  border-radius:7px;
 }
 
-.remove-photo{
+.previewName{
+  color:#ccc;
+  font-size:13px;
+}
+
+.remove{
   margin-left:auto;
   border:0;
   background:none;
-  color:#aaa;
+  color:#888;
   cursor:pointer;
+  font-size:17px;
 }
 
 form{
   display:flex;
   align-items:flex-end;
-  gap:7px;
+  gap:5px;
+  padding:8px;
   background:#0d0d0d;
   border:1px solid #303030;
-  border-radius:15px;
-  padding:8px;
+  border-radius:16px;
 }
 
-.icon-btn{
-  width:43px;
-  height:43px;
+.icon{
+  width:42px;
+  height:42px;
   border:0;
   background:transparent;
   color:#aaa;
@@ -320,22 +343,22 @@ form{
   font-size:19px;
 }
 
-.icon-btn:hover{
-  color:#fff;
+.icon:hover{
   background:#191919;
+  color:white;
 }
 
 textarea{
   flex:1;
-  min-height:43px;
+  min-height:42px;
   max-height:140px;
   resize:none;
-  border:0;
   outline:0;
+  border:0;
   background:transparent;
-  color:#fff;
-  padding:11px 5px;
+  color:white;
   font-size:15px;
+  padding:11px 5px;
 }
 
 textarea::placeholder{
@@ -343,47 +366,46 @@ textarea::placeholder{
 }
 
 .send{
-  width:43px;
-  height:43px;
+  width:42px;
+  height:42px;
   border:0;
   border-radius:10px;
-  background:var(--blue);
+  background:#1677ff;
   color:#fff;
-  cursor:pointer;
   font-size:20px;
-}
-
-.send:hover{
-  background:var(--blue2);
+  cursor:pointer;
 }
 
 .send:disabled{
   opacity:.5;
 }
 
-.file-input{
+.file{
   display:none;
 }
+
+/* MOBILE */
 
 @media(max-width:750px){
 
   .sidebar{
     position:fixed;
-    z-index:10;
     left:-280px;
     top:0;
     bottom:0;
+    z-index:20;
+    transition:.2s;
   }
 
   .sidebar.open{
     left:0;
   }
 
-  .mobile-menu{
+  .menu{
     display:block;
   }
 
-  .composer-wrap{
+  .composerArea{
     left:0;
   }
 
@@ -391,8 +413,8 @@ textarea::placeholder{
     font-size:34px;
   }
 
-  .message{
-    max-width:100%;
+  .content{
+    max-width:82%;
   }
 
 }
@@ -405,21 +427,24 @@ textarea::placeholder{
 
 <aside class="sidebar" id="sidebar">
 
-  <div class="brand">
+  <div class="logo">
     ✦ <span>AURA</span> AI
   </div>
 
-  <button class="new-chat" id="newChat">
+  <button class="newChat" id="newChat">
     ＋ New Chat
   </button>
 
-  <div class="history-title">History</div>
+  <div class="historyTitle">
+    CHAT HISTORY
+  </div>
 
   <div class="history" id="history"></div>
 
   <div class="creator">
-    AURA AI<br>
-    Developed by <strong>Yuvraj Singh Rathore</strong><br>
+    <strong>AURA AI</strong><br>
+    Created &amp; Developed by<br>
+    <strong>YUVRAJ SINGH RATHORE</strong><br><br>
     Powered by OpenAI technology
   </div>
 
@@ -427,79 +452,102 @@ textarea::placeholder{
 
 <main class="main">
 
-  <header class="topbar">
+<header class="topbar">
 
-    <button class="mobile-menu" id="menuBtn">☰</button>
+  <button class="menu" id="menu">☰</button>
 
-    <div class="top-title">AURA AI</div>
+  <div class="topTitle">
+    AURA AI
+  </div>
 
-  </header>
+</header>
 
-  <section class="chat" id="chat">
+<section class="chat" id="chat">
 
-    <div class="welcome" id="welcome">
-      <h1>✨ Hello, I'm <span>AURA</span></h1>
-      <p>
-        Ask me anything — maths, writing, coding, study and more.
-      </p>
+  <div class="welcome" id="welcome">
+
+    <h1>
+      ✨ Hello, I'm <span>AURA</span>
+    </h1>
+
+    <p>
+      Batao bhai, kya help chahiye?
+    </p>
+
+    <div class="welcomeCreator">
+      Created &amp; Developed by
+      <strong>YUVRAJ SINGH RATHORE</strong>
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 </main>
 
-<div class="composer-wrap">
+<div class="composerArea">
 
-  <div class="composer">
+<div class="composer">
 
-    <div class="attachment-preview" id="attachmentPreview">
+  <div class="preview" id="preview">
 
-      <img id="previewImage" src="" alt="Selected image">
+    <img id="previewImg">
 
-      <span id="photoName">Image selected</span>
-
-      <button class="remove-photo" id="removePhoto">✕</button>
-
+    <div class="previewName" id="previewName">
+      Image selected
     </div>
 
-    <form id="form">
-
-      <input
-        class="file-input"
-        type="file"
-        id="photoInput"
-        accept="image/*"
-      >
-
-      <button
-        type="button"
-        class="icon-btn"
-        id="photoBtn"
-        title="Add photo"
-      >📷</button>
-
-      <button
-        type="button"
-        class="icon-btn"
-        id="micBtn"
-        title="Voice input"
-      >🎤</button>
-
-      <textarea
-        id="input"
-        placeholder="Message AURA AI..."
-        rows="1"
-      ></textarea>
-
-      <button
-        class="send"
-        id="send"
-        type="submit"
-      >↑</button>
-
-    </form>
+    <button class="remove" id="remove">
+      ✕
+    </button>
 
   </div>
+
+  <form id="form">
+
+    <input
+      type="file"
+      id="file"
+      class="file"
+      accept="image/*"
+      capture="environment"
+    >
+
+    <button
+      type="button"
+      class="icon"
+      id="camera"
+      title="Camera / Photo"
+    >
+      📷
+    </button>
+
+    <button
+      type="button"
+      class="icon"
+      id="mic"
+      title="Voice"
+    >
+      🎤
+    </button>
+
+    <textarea
+      id="input"
+      rows="1"
+      placeholder="Batao bhai..."
+    ></textarea>
+
+    <button
+      class="send"
+      id="send"
+      type="submit"
+    >
+      ↑
+    </button>
+
+  </form>
+
+</div>
 
 </div>
 
@@ -507,105 +555,164 @@ textarea::placeholder{
 
 <script>
 
-const form = document.getElementById("form");
-const input = document.getElementById("input");
-const chat = document.getElementById("chat");
-const send = document.getElementById("send");
-const historyBox = document.getElementById("history");
-const newChatBtn = document.getElementById("newChat");
+const form=document.getElementById("form");
+const input=document.getElementById("input");
+const chat=document.getElementById("chat");
+const send=document.getElementById("send");
 
-const photoInput = document.getElementById("photoInput");
-const photoBtn = document.getElementById("photoBtn");
-const attachmentPreview = document.getElementById("attachmentPreview");
-const previewImage = document.getElementById("previewImage");
-const photoName = document.getElementById("photoName");
-const removePhoto = document.getElementById("removePhoto");
+const historyBox=document.getElementById("history");
+const newChat=document.getElementById("newChat");
 
-const micBtn = document.getElementById("micBtn");
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.getElementById("sidebar");
+const file=document.getElementById("file");
+const camera=document.getElementById("camera");
+const preview=document.getElementById("preview");
+const previewImg=document.getElementById("previewImg");
+const previewName=document.getElementById("previewName");
+const remove=document.getElementById("remove");
 
-let chats = JSON.parse(localStorage.getItem("aura_chats") || "[]");
-let currentChatId = null;
-let messages = [];
-let selectedImage = null;
+const mic=document.getElementById("mic");
 
-function saveChats(){
-  localStorage.setItem("aura_chats",JSON.stringify(chats));
+const menu=document.getElementById("menu");
+const sidebar=document.getElementById("sidebar");
+
+let chats=JSON.parse(
+  localStorage.getItem("aura_chats") || "[]"
+);
+
+let currentId=null;
+let messages=[];
+let selectedImage=null;
+
+
+/* STORAGE */
+
+function saveAll(){
+  localStorage.setItem(
+    "aura_chats",
+    JSON.stringify(chats)
+  );
 }
 
-function makeId(){
-  return Date.now().toString(36)+Math.random().toString(36).slice(2);
+function id(){
+  return Date.now().toString(36)+
+         Math.random().toString(36).slice(2);
 }
 
-function getTitle(){
-  const first = messages.find(x=>x.role==="user");
+
+/* HISTORY */
+
+function title(){
+
+  const first=messages.find(
+    x=>x.role==="user"
+  );
+
   if(!first) return "New Chat";
-  return first.content.slice(0,32) || "New Chat";
+
+  return first.content.slice(0,35);
+}
+
+function saveCurrent(){
+
+  if(!currentId){
+
+    currentId=id();
+
+    chats.push({
+      id:currentId,
+      title:"New Chat",
+      pinned:false,
+      messages:[],
+      updatedAt:Date.now()
+    });
+
+  }
+
+  const c=chats.find(x=>x.id===currentId);
+
+  if(!c)return;
+
+  c.messages=messages;
+  c.title=title();
+  c.updatedAt=Date.now();
+
+  saveAll();
+  renderHistory();
+
 }
 
 function renderHistory(){
 
   historyBox.innerHTML="";
 
-  const sorted=[...chats].sort((a,b)=>{
-    if(a.pinned!==b.pinned) return a.pinned ? -1 : 1;
-    return b.updatedAt-a.updatedAt;
-  });
+  const sorted=[...chats].sort(
+    (a,b)=>{
+      if(a.pinned!==b.pinned)
+        return a.pinned ? -1:1;
 
-  sorted.forEach(item=>{
+      return b.updatedAt-a.updatedAt;
+    }
+  );
+
+  sorted.forEach(c=>{
 
     const row=document.createElement("div");
-    row.className="history-item"+
-      (item.id===currentChatId ? " active":"");
+
+    row.className="historyItem";
 
     const pin=document.createElement("span");
-    pin.textContent=item.pinned ? "📌":"";
+
+    pin.textContent=c.pinned?"📌":"";
 
     const name=document.createElement("div");
-    name.className="history-name";
-    name.textContent=item.title;
+
+    name.className="historyName";
+    name.textContent=c.title;
 
     const del=document.createElement("span");
-    del.className="delete-history";
+
     del.textContent="×";
+    del.style.color="#777";
 
     row.appendChild(pin);
     row.appendChild(name);
     row.appendChild(del);
 
-    row.addEventListener("click",(e)=>{
+    row.onclick=e=>{
 
       if(e.target===del){
 
-        e.stopPropagation();
+        chats=chats.filter(
+          x=>x.id!==c.id
+        );
 
-        chats=chats.filter(x=>x.id!==item.id);
-
-        if(currentChatId===item.id){
-          currentChatId=null;
+        if(currentId===c.id){
+          currentId=null;
           messages=[];
           renderChat();
         }
 
-        saveChats();
+        saveAll();
         renderHistory();
         return;
       }
 
       if(e.target===pin){
 
-        e.stopPropagation();
-
-        item.pinned=!item.pinned;
-        saveChats();
+        c.pinned=!c.pinned;
+        saveAll();
         renderHistory();
         return;
       }
 
-      loadChat(item.id);
+      currentId=c.id;
+      messages=c.messages || [];
 
-    });
+      renderChat();
+
+      sidebar.classList.remove("open");
+
+    };
 
     historyBox.appendChild(row);
 
@@ -613,82 +720,107 @@ function renderHistory(){
 
 }
 
+
+/* CHAT */
+
 function renderChat(){
 
   chat.innerHTML="";
 
   if(messages.length===0){
 
-    const welcome=document.createElement("div");
+    const w=document.createElement("div");
 
-    welcome.className="welcome";
-    welcome.id="welcome";
+    w.className="welcome";
 
-    welcome.innerHTML=
-      "<h1>✨ Hello, I'm <span>AURA</span></h1>"+
-      "<p>Ask me anything — maths, writing, coding, study and more.</p>";
+    w.innerHTML=`
+      <h1>✨ Hello, I'm <span>AURA</span></h1>
+      <p>Batao bhai, kya help chahiye?</p>
+      <div class="welcomeCreator">
+        Created &amp; Developed by
+        <strong>YUVRAJ SINGH RATHORE</strong>
+      </div>
+    `;
 
-    chat.appendChild(welcome);
+    chat.appendChild(w);
+
     return;
   }
 
-  messages.forEach((msg,index)=>{
+  messages.forEach((m,index)=>{
 
-    const message=document.createElement("div");
+    const row=document.createElement("div");
 
-    message.className="message "+(
-      msg.role==="user" ? "user":"ai"
-    );
+    row.className=
+      "message "+
+      (m.role==="user"?"user":"ai");
 
     const avatar=document.createElement("div");
 
     avatar.className="avatar";
-    avatar.textContent=
-      msg.role==="user" ? "U":"✦";
 
-    const area=document.createElement("div");
+    avatar.textContent=
+      m.role==="user"?"U":"✦";
+
+    const content=document.createElement("div");
+
+    content.className="content";
 
     const bubble=document.createElement("div");
 
     bubble.className="bubble";
-    bubble.textContent=msg.content;
+    bubble.textContent=m.content;
 
-    area.appendChild(bubble);
+    content.appendChild(bubble);
 
-    if(msg.role==="assistant"){
+    if(m.role==="assistant"){
 
       const tools=document.createElement("div");
 
-      tools.className="message-tools";
+      tools.className="tools";
 
       const copy=document.createElement("button");
 
-      copy.className="small-btn";
+      copy.className="tool";
       copy.textContent="Copy";
 
       copy.onclick=()=>{
-        navigator.clipboard.writeText(msg.content);
+        navigator.clipboard.writeText(m.content);
         copy.textContent="Copied";
-        setTimeout(()=>copy.textContent="Copy",1200);
+        setTimeout(
+          ()=>copy.textContent="Copy",
+          1200
+        );
       };
 
       const regen=document.createElement("button");
 
-      regen.className="small-btn";
+      regen.className="tool";
       regen.textContent="Regenerate";
 
-      regen.onclick=()=>regenerate(index);
+      regen.onclick=()=>{
+        regenerate(index);
+      };
+
+      const share=document.createElement("button");
+
+      share.className="tool";
+      share.textContent="Share";
+
+      share.onclick=()=>shareChat();
 
       tools.appendChild(copy);
       tools.appendChild(regen);
+      tools.appendChild(share);
 
-      area.appendChild(tools);
+      content.appendChild(tools);
+
     }
 
-    message.appendChild(avatar);
-    message.appendChild(area);
+    row.appendChild(avatar);
+    row.appendChild(content);
 
-    chat.appendChild(message);
+    chat.appendChild(row);
 
   });
 
@@ -696,83 +828,24 @@ function renderChat(){
 
 }
 
-function createChatIfNeeded(){
 
-  if(currentChatId) return;
-
-  currentChatId=makeId();
-
-  chats.push({
-    id:currentChatId,
-    title:"New Chat",
-    pinned:false,
-    messages:[],
-    updatedAt:Date.now()
-  });
-
-}
-
-function saveCurrentChat(){
-
-  createChatIfNeeded();
-
-  const item=chats.find(x=>x.id===currentChatId);
-
-  if(!item) return;
-
-  item.messages=messages;
-  item.title=getTitle();
-  item.updatedAt=Date.now();
-
-  saveChats();
-  renderHistory();
-
-}
-
-function loadChat(id){
-
-  const item=chats.find(x=>x.id===id);
-
-  if(!item) return;
-
-  currentChatId=id;
-  messages=item.messages || [];
-
-  renderChat();
-  renderHistory();
-
-  sidebar.classList.remove("open");
-
-}
-
-newChatBtn.addEventListener("click",()=>{
-
-  currentChatId=null;
-  messages=[];
-  selectedImage=null;
-
-  clearPhoto();
-  renderChat();
-  renderHistory();
-
-  input.focus();
-
-});
-
-function addMessage(role,text){
-
-  messages.push({
-    role:role,
-    content:text
-  });
-
-  renderChat();
-
-}
+/* SEND */
 
 async function sendMessage(text){
 
-  createChatIfNeeded();
+  if(!currentId){
+
+    currentId=id();
+
+    chats.push({
+      id:currentId,
+      title:"New Chat",
+      pinned:false,
+      messages:[],
+      updatedAt:Date.now()
+    });
+
+  }
 
   messages.push({
     role:"user",
@@ -785,7 +858,7 @@ async function sendMessage(text){
 
   messages.push({
     role:"assistant",
-    content:"Thinking..."
+    content:"Soch raha hoon..."
   });
 
   renderChat();
@@ -794,186 +867,300 @@ async function sendMessage(text){
 
   try{
 
-    const response=await fetch("/api/chat",{
-
-      method:"POST",
-
-      headers:{
-        "Content-Type":"application/json"
-      },
-
-      body:JSON.stringify({
-        messages:messages.slice(0,-1)
-      })
-
-    });
+    const response=await fetch(
+      "/api/chat",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+        body:JSON.stringify({
+          messages:messages.slice(0,-1)
+        })
+      }
+    );
 
     const data=await response.json();
 
     if(!response.ok){
-      throw new Error(data.error || "Request failed");
+
+      throw new Error(
+        data.error ||
+        "Request failed"
+      );
+
     }
 
-    messages[aiIndex].content=data.reply;
+    messages[aiIndex].content=
+      data.reply;
 
   }catch(error){
 
     messages[aiIndex].content=
-      "Sorry, an error occurred: "+
+      "Bhai, abhi ek problem aa gayi: "+
       error.message;
 
-  }finally{
-
-    send.disabled=false;
-
-    saveCurrentChat();
-    renderChat();
-
-    input.focus();
-
   }
 
-}
+  send.disabled=false;
 
-form.addEventListener("submit",async(e)=>{
-
-  e.preventDefault();
-
-  const text=input.value.trim();
-
-  if(!text && !selectedImage) return;
-
-  input.value="";
-
-  if(selectedImage){
-
-    const imageText=
-      text
-      ? text+"\n\n[Image attached: "+selectedImage.name+"]"
-      : "[Image attached: "+selectedImage.name+"]";
-
-    clearPhoto();
-
-    await sendMessage(imageText);
-
-  }else{
-
-    await sendMessage(text);
-
-  }
-
-});
-
-function regenerate(index){
-
-  if(index<1) return;
-
-  const previous=messages[index-1];
-
-  if(!previous || previous.role!=="user") return;
-
-  messages=messages.slice(0,index);
-
+  saveCurrent();
   renderChat();
 
-  sendMessage(previous.content);
-
 }
 
-photoBtn.addEventListener("click",()=>{
-  photoInput.click();
-});
 
-photoInput.addEventListener("change",()=>{
+/* FORM */
 
-  const file=photoInput.files[0];
+form.addEventListener(
+  "submit",
+  async e=>{
 
-  if(!file) return;
+    e.preventDefault();
 
-  selectedImage=file;
+    const text=input.value.trim();
 
-  const reader=new FileReader();
+    if(!text && !selectedImage)
+      return;
 
-  reader.onload=(e)=>{
-    previewImage.src=e.target.result;
+    input.value="";
+
+    if(selectedImage){
+
+      const imageMessage=
+        text+
+        "\n\n[Photo attached: "+
+        selectedImage.name+
+        "]";
+
+      clearImage();
+
+      await sendMessage(
+        imageMessage
+      );
+
+    }else{
+
+      await sendMessage(text);
+
+    }
+
+  }
+);
+
+
+/* NEW CHAT */
+
+newChat.onclick=()=>{
+
+  currentId=null;
+  messages=[];
+
+  clearImage();
+
+  renderChat();
+  renderHistory();
+
+  input.focus();
+
+};
+
+
+/* PHOTO / CAMERA */
+
+camera.onclick=()=>{
+  file.click();
+};
+
+file.onchange=()=>{
+
+  const f=file.files[0];
+
+  if(!f)return;
+
+  selectedImage=f;
+
+  previewName.textContent=f.name;
+
+  const reader=
+    new FileReader();
+
+  reader.onload=e=>{
+    previewImg.src=e.target.result;
   };
 
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(f);
 
-  photoName.textContent=file.name;
-  attachmentPreview.style.display="flex";
+  preview.style.display="flex";
 
-});
+};
 
-function clearPhoto(){
+function clearImage(){
 
   selectedImage=null;
-  photoInput.value="";
-  previewImage.src="";
-  attachmentPreview.style.display="none";
+  file.value="";
+  previewImg.src="";
+  preview.style.display="none";
 
 }
 
-removePhoto.addEventListener("click",clearPhoto);
+remove.onclick=clearImage;
+
+
+/* MIC */
 
 let recognition=null;
 
-if("webkitSpeechRecognition" in window ||
-   "SpeechRecognition" in window){
+if(
+  "SpeechRecognition" in window ||
+  "webkitSpeechRecognition" in window
+){
 
   const SpeechRecognition=
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
-  recognition=new SpeechRecognition();
+  recognition=
+    new SpeechRecognition();
 
   recognition.lang="en-IN";
+
   recognition.interimResults=false;
 
-  recognition.onresult=(event)=>{
-
-    input.value+=
-      (input.value ? " ":"")+
-      event.results[0][0].transcript;
-
+  recognition.onstart=()=>{
+    mic.textContent="🔴";
   };
 
   recognition.onend=()=>{
-    micBtn.textContent="🎤";
+    mic.textContent="🎤";
   };
 
-  micBtn.addEventListener("click",()=>{
+  recognition.onresult=e=>{
+
+    const text=
+      e.results[0][0].transcript;
+
+    input.value+=
+      (input.value?" ":"")+
+      text;
+
+  };
+
+  mic.onclick=()=>{
 
     try{
       recognition.start();
-      micBtn.textContent="🔴";
     }catch(e){}
 
-  });
+  };
 
 }else{
 
-  micBtn.addEventListener("click",()=>{
-    alert("Voice input is not supported by this browser.");
-  });
+  mic.onclick=()=>{
+    alert(
+      "Bhai, is browser mein voice input support nahi hai."
+    );
+  };
 
 }
 
-menuBtn.addEventListener("click",()=>{
-  sidebar.classList.toggle("open");
-});
 
-input.addEventListener("keydown",(e)=>{
+/* REGENERATE */
 
-  if(e.key==="Enter" && !e.shiftKey){
+function regenerate(index){
 
-    e.preventDefault();
+  if(index<1)return;
 
-    form.requestSubmit();
+  const previous=
+    messages[index-1];
+
+  if(!previous ||
+     previous.role!=="user")
+    return;
+
+  messages=
+    messages.slice(0,index);
+
+  renderChat();
+
+  sendMessage(
+    previous.content
+  );
+
+}
+
+
+/* SHARE */
+
+async function shareChat(){
+
+  let text="AURA AI CHAT\n\n";
+
+  messages.forEach(m=>{
+
+    text+=
+      (m.role==="user"
+        ?"You: "
+        :"AURA: ")+
+      m.content+
+      "\n\n";
+
+  });
+
+  if(navigator.share){
+
+    try{
+
+      await navigator.share({
+        title:"AURA AI Chat",
+        text:text
+      });
+
+    }catch(e){}
+
+  }else{
+
+    await navigator.clipboard.writeText(text);
+
+    alert(
+      "Chat copy ho gaya. Ab jahan chaho paste/share kar do."
+    );
 
   }
 
-});
+}
+
+
+/* MOBILE MENU */
+
+menu.onclick=()=>{
+  sidebar.classList.toggle("open");
+};
+
+
+/* ENTER */
+
+input.addEventListener(
+  "keydown",
+  e=>{
+
+    if(
+      e.key==="Enter" &&
+      !e.shiftKey
+    ){
+
+      e.preventDefault();
+
+      form.requestSubmit();
+
+    }
+
+  }
+);
+
+
+/* START */
 
 renderHistory();
 renderChat();
